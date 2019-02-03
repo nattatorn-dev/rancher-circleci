@@ -51,7 +51,7 @@ jobs:
     working_directory: ~/repo
     steps:
       - run: echo api-testing
-  approval:
+  approval-step:
     docker:
       - image: circleci/node:8.11.1-stretch
     working_directory: ~/repo
