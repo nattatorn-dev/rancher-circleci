@@ -39,18 +39,24 @@ jobs:
               --auto_complete --timeout 600\
               /
       - run: echo Done
+  cf:
+    - run: echo cf
+  api-testing:
+    - run: echo api-testing
+  approval:
+    - run: echo approval
 workflows:
   version: 2
   build-test-and-deploy:
     jobs:
       - build
-      - test1:
+      - cf:
           requires:
             - build
-      - test2:
+      - api-testing:
+          requires:
+            - cf
+      - approval:
+          requires:
           type: approval
-          requires:
-            - test1
-      - deploy:
-          requires:
-            - test2
+            - api-testing
