@@ -69,6 +69,6 @@ workflows:
           requires:
             - cf
       - approval:
-          requires:
           type: approval
+          requires:
             - api-testing
