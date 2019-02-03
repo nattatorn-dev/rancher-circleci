@@ -39,3 +39,18 @@ jobs:
               --auto_complete --timeout 600\
               /
       - run: echo Done
+workflows:
+  version: 2
+  build-test-and-deploy:
+    jobs:
+      - build
+      - test1:
+          requires:
+            - build
+      - test2:
+          type: approval
+          requires:
+            - test1
+      - deploy:
+          requires:
+            - test2
