@@ -40,35 +40,26 @@ jobs:
               /
       - run: echo Done
   cf:
+    requires:
+      - build
     docker:
       - image: circleci/node:8.11.1-stretch
     working_directory: ~/repo
     steps:
       - run: echo cf
   api-testing:
+    requires:
+      - build
     docker:
       - image: circleci/node:8.11.1-stretch
     working_directory: ~/repo
     steps:
       - run: echo api-testing
   approval:
+    requires:
+      - build
     docker:
       - image: circleci/node:8.11.1-stretch
     working_directory: ~/repo
     steps:
       - run: echo approval
-workflows:
-  version: 2
-  build-test-and-deploy:
-    jobs:
-      - build
-      - cf:
-          requires:
-            - build
-      - api-testing:
-          requires:
-            - cf
-      - approval:
-          requires:
-          type: approval
-            - api-testing
