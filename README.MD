@@ -10,3 +10,5 @@ npm start
 ```
 bin/www
 ```
+
+### port: `3000`
